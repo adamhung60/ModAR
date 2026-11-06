@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="ModAR: Modality-Autoregressive World-Action Models">
+  <meta name="keywords" content="world-action models, multimodal generation, robot learning, manipulation, ModAR">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ModAR</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=13">
+  <link rel="icon" type="image/svg+xml" href="./static/images/icon.svg?v=2">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .teaser-video {
+      border-radius: 8px;
+      width: 100%;
+      display: block;
+      background-color: #111;
+    }
+    .coming-soon {
+      cursor: default;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/hero.js" defer></script>
+  <script src="./static/js/rollouts.js" defer></script>
+  <script src="./static/js/mixture.js" defer></script>
+  <script src="./static/js/forms.js?v=3" defer></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">ModAR: Modality-Autoregressive World-Action Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://adamhung60.github.io">Adam Hung</a>,</span>
+            <span class="author-block">
+              <a href="https://www.bart-ai.com">Bardienus P. Duisterhof</a>,</span>
+            <span class="author-block">
+              <a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a>,</span>
+            <span class="author-block">
+              <a href="https://ichnow.ski">Jeffrey Ichnowski</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Carnegie Mellon University</span>
+          </div>
+
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2609.17524" target="_blank" rel="noopener"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark coming-soon"
+                   style="cursor: default;">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                </a>
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Teaser caption. -->
+    <div class="page-block">
+    <div class="modar-hero is-real" id="modar-hero">
+    <div class="modar-hero-kicker">
+      <span class="modar-hero-name">ModAR:</span>
+      <span class="modar-hero-tagline">Predict the future one modality at a time, then act</span>
+    </div>
+    <div class="modar-hero-flow" aria-hidden="true"></div>
+    <div class="modar-hero-grid">
+      <div class="modar-hero-col is-active" data-mod="tracks">
+        <div class="modar-hero-col-title">1&ensp;Predicted tracks</div>
+        <div class="modar-hero-col-sub">motion</div>
+        <div class="modar-hero-rule"></div>
+        <div class="modar-hero-panel">
+          <img class="modar-hero-frame is-visible" data-task="stack" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/stack/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="fold" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/fold/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="drawer" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/drawer/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="dump" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/dump/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="pick" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/pick/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="bread" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/bread/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="put" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/put/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="bowls" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/bowls/tracks/00.jpg">
+          <img class="modar-hero-frame" data-task="switch" data-mod="tracks" alt="Predicted tracks" src="./static/hero/frames/switch/tracks/00.jpg">
+        </div>
+      </div>
+      <div class="modar-hero-col" data-mod="dino">
+        <div class="modar-hero-col-title">2&ensp;Predicted DINO</div>
+        <div class="modar-hero-col-sub">semantics</div>
+        <div class="modar-hero-rule"></div>
+        <div class="modar-hero-panel">
+          <img class="modar-hero-frame is-visible" data-task="stack" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/stack/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="fold" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/fold/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="drawer" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/drawer/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="dump" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/dump/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="pick" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/pick/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="bread" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/bread/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="put" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/put/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="bowls" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/bowls/dino/00.jpg">
+          <img class="modar-hero-frame" data-task="switch" data-mod="dino" alt="Predicted DINO" src="./static/hero/frames/switch/dino/00.jpg">
+        </div>
+      </div>
+      <div class="modar-hero-col" data-mod="depth">
+        <div class="modar-hero-col-title">3&ensp;Predicted depth</div>
+        <div class="modar-hero-col-sub">geometry</div>
+        <div class="modar-hero-rule"></div>
+        <div class="modar-hero-panel">
+          <img class="modar-hero-frame is-visible" data-task="stack" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/stack/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="fold" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/fold/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="drawer" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/drawer/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="dump" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/dump/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="pick" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/pick/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="bread" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/bread/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="put" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/put/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="bowls" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/bowls/depth/00.jpg">
+          <img class="modar-hero-frame" data-task="switch" data-mod="depth" alt="Predicted depth" src="./static/hero/frames/switch/depth/00.jpg">
+        </div>
+      </div>
+      <div class="modar-hero-col" data-mod="rgb">
+        <div class="modar-hero-col-title">4&ensp;Predicted actions</div>
+        <div class="modar-hero-col-sub">live RGB</div>
+        <div class="modar-hero-rule"></div>
+        <div class="modar-hero-panel">
+          <img class="modar-hero-frame is-visible" data-task="stack" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/stack/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="fold" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/fold/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="drawer" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/drawer/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="dump" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/dump/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="pick" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/pick/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="bread" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/bread/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="put" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/put/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="bowls" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/bowls/rgb/000.jpg">
+          <img class="modar-hero-frame" data-task="switch" data-mod="rgb" alt="Predicted actions" src="./static/hero/frames/switch/rgb/000.jpg">
+        </div>
+      </div>
+    </div>
+    <p class="modar-hero-step">Generating future <b>tracks</b> prediction</p>
+    <div class="modar-hero-transport">
+      <button class="modar-hero-toggle" type="button" aria-label="Pause">
+        <svg class="modar-hero-icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+          <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+        </svg>
+        <svg class="modar-hero-icon-play" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 5.5v13l11-6.5z"></path>
+        </svg>
+      </button>
+      <input class="modar-hero-scrubber" type="range" min="0" max="1000" value="0" step="1" aria-label="Timeline">
+      <button class="more-rollouts-fs" type="button" aria-label="Enter fullscreen">
+        <svg class="more-rollouts-fs-enter" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <svg class="more-rollouts-fs-exit" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modar-hero-task-rows">
+      <div class="modar-hero-task-row">
+        <div class="modar-hero-task-row-label">Real-world tasks</div>
+        <div class="modar-hero-tasks">
+          <button class="modar-hero-task is-active" type="button" data-task="stack">Stack cups</button>
+          <button class="modar-hero-task" type="button" data-task="fold">Fold towel</button>
+          <button class="modar-hero-task" type="button" data-task="drawer">Place in drawer</button>
+        </div>
+      </div>
+      <div class="modar-hero-task-row">
+        <div class="modar-hero-task-row-label">Simulation tasks</div>
+        <div class="modar-hero-tasks">
+          <button class="modar-hero-task" type="button" data-task="bowls">Stack bowls</button>
+          <button class="modar-hero-task" type="button" data-task="bread">Place bread</button>
+          <button class="modar-hero-task" type="button" data-task="switch">Turn switch</button>
+          <button class="modar-hero-task" type="button" data-task="pick">Pick bottles</button>
+          <button class="modar-hero-task" type="button" data-task="dump">Dump bin</button>
+          <button class="modar-hero-task" type="button" data-task="put">Put bottles</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <details class="more-rollouts" id="more-rollouts">
+      <summary>More real-world rollouts</summary>
+      <div class="more-rollouts-body">
+      <div class="more-rollouts-stage">
+        <button class="more-rollouts-nav" type="button" data-dir="-1" aria-label="Previous rollout">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.5 4.5L8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="more-rollouts-grid-wrap">
+        <div class="modar-hero-grid more-rollouts-grid">
+          <div class="modar-hero-col is-active" data-mod="tracks">
+            <div class="modar-hero-col-title">1&ensp;Predicted tracks</div>
+            <div class="modar-hero-col-sub">motion</div>
+            <div class="modar-hero-rule"></div>
+            <div class="modar-hero-panel">
+              <div class="more-rollouts-crop" data-col="0">
+                <canvas class="more-rollouts-frame"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="modar-hero-col is-active" data-mod="dino">
+            <div class="modar-hero-col-title">2&ensp;Predicted DINO</div>
+            <div class="modar-hero-col-sub">semantics</div>
+            <div class="modar-hero-rule"></div>
+            <div class="modar-hero-panel">
+              <div class="more-rollouts-crop" data-col="1">
+                <canvas class="more-rollouts-frame"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="modar-hero-col is-active" data-mod="depth">
+            <div class="modar-hero-col-title">3&ensp;Predicted depth</div>
+            <div class="modar-hero-col-sub">geometry</div>
+            <div class="modar-hero-rule"></div>
+            <div class="modar-hero-panel">
+              <div class="more-rollouts-crop" data-col="2">
+                <canvas class="more-rollouts-frame"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="modar-hero-col is-active" data-mod="rgb">
+            <div class="modar-hero-col-title">4&ensp;Predicted actions</div>
+            <div class="modar-hero-col-sub">live RGB</div>
+            <div class="modar-hero-rule"></div>
+            <div class="modar-hero-panel">
+              <div class="more-rollouts-crop" data-col="3">
+                <canvas class="more-rollouts-frame"></canvas>
+              </div>
+            </div>
+            <div class="more-rollouts-speed" aria-hidden="true">1× SPEED</div>
+          </div>
+        </div>
+        </div>
+        <button class="more-rollouts-nav" type="button" data-dir="1" aria-label="Next rollout">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.5 4.5L16 12l-7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <video class="more-rollouts-video" muted loop playsinline preload="auto"></video>
+      <div class="modar-hero-transport more-rollouts-transport">
+        <button class="modar-hero-toggle more-rollouts-toggle" type="button" aria-label="Pause">
+          <svg class="modar-hero-icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+            <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+          </svg>
+          <svg class="modar-hero-icon-play" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5.5v13l11-6.5z"></path>
+          </svg>
+        </button>
+        <input class="modar-hero-scrubber more-rollouts-scrubber" type="range" min="0" max="1000" value="0" step="1" aria-label="Timeline">
+        <button class="more-rollouts-fs" type="button" aria-label="Enter fullscreen">
+          <svg class="more-rollouts-fs-enter" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="more-rollouts-fs-exit" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="more-rollouts-index"><span data-rollout-index>1</span> / <span data-rollout-total>8</span></p>
+      <div class="modar-hero-tasks">
+        <button class="modar-hero-task is-active" type="button" data-rollout-task="stack">Stack cups</button>
+        <button class="modar-hero-task" type="button" data-rollout-task="fold">Fold towel</button>
+        <button class="modar-hero-task" type="button" data-rollout-task="drawer">Place in drawer</button>
+      </div>
+      </div>
+    </details>
+    </div>
+    <!--/ Teaser caption. -->
+
+    <!-- Abstract. -->
+    <div class="page-block">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          World-action models (WAMs) jointly model future observations and actions,
+          typically predicting the future as RGB images.
+          Other visual modalities such as depth, pretrained visual features, and point
+          tracks can more efficiently capture geometric, semantic, and motion features.
+          However, how best to combine these modalities within WAMs remains an open question.
+          We introduce ModAR, the first WAM to autoregressively denoise multiple future
+          modalities before predicting actions.
+          This allows each prediction to condition on previously generated modalities.
+          We train from scratch to systematically study how training-data mixtures,
+          predicted modalities, and WAM formulations affect performance.
+          In our evaluations, WAMs benefit from predicting point tracks, DINO features,
+          and depth maps, while additionally predicting future RGB does not provide a consistent benefit.
+          We also find that ModAR's sequential generation outperforms existing WAM
+          formulations, with the highest average success rate at all evaluated data scales.
+          We also fine-tune the video-model-initialized WAM Flex-π on the same data;
+          ModAR achieves a slightly higher observed average success rate (75% vs. 72%)
+          while using approximately 20× fewer training FLOPs and no pretraining.
+          On three real-world bimanual tasks, ModAR outperforms baselines and improves
+          with human videos.
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Generation formulations. -->
+    <div class="page-block">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 wam-forms-heading" id="wam-forms">ModAR compared to representative existing WAM formulations</h2>
+        <p class="wam-forms-hint">Click a diagram to replay the animation</p>
+        <div class="wam-forms">
+          <div class="wam-form" data-form="modar">
+            <div class="wam-form-title">ModAR</div>
+            <p class="wam-form-cites">&nbsp;</p>
+            <div class="wam-form-card" tabindex="0" role="button" aria-label="Play ModAR generation animation">
+              <span class="wam-form-play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3.1 1.8v8.4L10.4 6z"/></svg>Replay</span>
+              <svg class="wam-diagram" viewBox="0 0 260 148" role="img" aria-label="ModAR formulation">
+                <defs>
+                  <marker id="arr-modar" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="#CC3829"/>
+                  </marker>
+                  <clipPath id="clip-modar-m1"><rect x="16" y="110" width="48" height="26" rx="5"/></clipPath>
+                  <clipPath id="clip-modar-mk"><rect x="94" y="110" width="48" height="26" rx="5"/></clipPath>
+                  <clipPath id="clip-modar-actions"><rect x="160" y="110" width="80" height="26" rx="5"/></clipPath>
+                </defs>
+                <rect x="80" y="6" width="100" height="26" rx="5" fill="#F1F1F1" stroke="#B8B8B8" stroke-width="1.4"/>
+                <text x="130" y="23" text-anchor="middle">obs</text>
+                <line x1="130" y1="32" x2="130" y2="46" stroke="#CC3829" stroke-width="1.6" marker-end="url(#arr-modar)"/>
+                <rect x="10" y="48" width="240" height="30" rx="5" fill="#fff" stroke="#CC3829" stroke-width="1.8"/>
+                <text x="130" y="67" text-anchor="middle" fill="#CC3829" font-weight="700">Shared DiT backbone</text>
+                <g class="wam-token" data-token="m1">
+                  <rect class="wam-token-fill" x="16" y="110" width="48" height="26" rx="5" fill="#FCEDEA" stroke="#CC3829" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="16" y="110" width="48" height="26" clip-path="url(#clip-modar-m1)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="40" y="127" text-anchor="middle" fill="#CC3829">m₁</text>
+                </g>
+                <text x="80" y="127" text-anchor="middle" fill="#CC3829" font-weight="700">···</text>
+                <g class="wam-token" data-token="mk">
+                  <rect class="wam-token-fill" x="94" y="110" width="48" height="26" rx="5" fill="#FCEDEA" stroke="#CC3829" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="94" y="110" width="48" height="26" clip-path="url(#clip-modar-mk)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="118" y="127" text-anchor="middle" fill="#CC3829">mₖ</text>
+                </g>
+                <g class="wam-token" data-token="actions">
+                  <rect class="wam-token-fill" x="160" y="110" width="80" height="26" rx="5" fill="#CC3829" stroke="#CC3829" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="160" y="110" width="80" height="26" clip-path="url(#clip-modar-actions)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="200" y="127" text-anchor="middle" fill="#fff" font-weight="700">actions</text>
+                </g>
+                <line class="wam-arr wam-arr-down" data-i="0" x1="40" y1="78" x2="40" y2="108" stroke="#CC3829" stroke-width="1.6" marker-end="url(#arr-modar)"/>
+                <line class="wam-arr wam-arr-down" data-i="1" x1="118" y1="78" x2="118" y2="108" stroke="#CC3829" stroke-width="1.6" marker-end="url(#arr-modar)"/>
+                <line class="wam-arr wam-arr-down" data-i="2" x1="200" y1="78" x2="200" y2="108" stroke="#CC3829" stroke-width="1.6" marker-end="url(#arr-modar)"/>
+                <line class="wam-arr wam-arr-diag" data-i="0" x1="58" y1="110" x2="86" y2="80" stroke="#CC3829" stroke-width="1.6" marker-end="url(#arr-modar)"/>
+                <line class="wam-arr wam-arr-diag" data-i="1" x1="136" y1="110" x2="164" y2="80" stroke="#CC3829" stroke-width="1.6" marker-end="url(#arr-modar)"/>
+              </svg>
+            </div>
+            <p class="wam-form-blurb">Future modalities are predicted sequentially, each conditioned on earlier predictions; actions are generated last.</p>
+          </div>
+
+          <div class="wam-form" data-form="unified">
+            <div class="wam-form-title">Unified</div>
+            <p class="wam-form-cites"><a href="https://arxiv.org/abs/2602.15922" target="_blank" rel="noopener">DreamZero</a><span> · </span><a href="https://arxiv.org/abs/2601.16163" target="_blank" rel="noopener">Cosmos Policy</a></p>
+            <div class="wam-form-card" tabindex="0" role="button" aria-label="Play Unified generation animation">
+              <span class="wam-form-play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3.1 1.8v8.4L10.4 6z"/></svg>Replay</span>
+              <svg class="wam-diagram" viewBox="0 0 260 148" role="img" aria-label="Unified formulation">
+                <defs>
+                  <marker id="arr-unified" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="#7140B2"/>
+                  </marker>
+                  <clipPath id="clip-unified-m1"><rect x="22" y="109" width="44" height="26" rx="5"/></clipPath>
+                  <clipPath id="clip-unified-mk"><rect x="98" y="109" width="44" height="26" rx="5"/></clipPath>
+                  <clipPath id="clip-unified-actions"><rect x="154" y="109" width="82" height="26" rx="5"/></clipPath>
+                </defs>
+                <rect x="80" y="6" width="100" height="26" rx="5" fill="#F1F1F1" stroke="#B8B8B8" stroke-width="1.4"/>
+                <text x="130" y="23" text-anchor="middle">obs</text>
+                <line x1="130" y1="32" x2="130" y2="46" stroke="#7140B2" stroke-width="1.6" marker-end="url(#arr-unified)"/>
+                <rect x="16" y="48" width="228" height="30" rx="5" fill="#fff" stroke="#7140B2" stroke-width="1.8"/>
+                <text x="130" y="67" text-anchor="middle" fill="#7140B2" font-weight="700">Shared DiT backbone</text>
+                <line x1="130" y1="78" x2="130" y2="100" stroke="#7140B2" stroke-width="1.6" marker-end="url(#arr-unified)"/>
+                <rect x="12" y="102" width="236" height="40" rx="6" fill="#FBF8FF" stroke="#7140B2" stroke-width="1.8"/>
+                <g class="wam-token" data-token="m1">
+                  <rect class="wam-token-fill" x="22" y="109" width="44" height="26" rx="5" fill="#F3ECFA" stroke="#7140B2" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="22" y="109" width="44" height="26" clip-path="url(#clip-unified-m1)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="44" y="126" text-anchor="middle" fill="#7140B2">m₁</text>
+                </g>
+                <text x="82" y="126" text-anchor="middle" fill="#7140B2" font-weight="700">···</text>
+                <g class="wam-token" data-token="mk">
+                  <rect class="wam-token-fill" x="98" y="109" width="44" height="26" rx="5" fill="#F3ECFA" stroke="#7140B2" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="98" y="109" width="44" height="26" clip-path="url(#clip-unified-mk)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="120" y="126" text-anchor="middle" fill="#7140B2">mₖ</text>
+                </g>
+                <g class="wam-token" data-token="actions">
+                  <rect class="wam-token-fill" x="154" y="109" width="82" height="26" rx="5" fill="#7140B2" stroke="#7140B2" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="154" y="109" width="82" height="26" clip-path="url(#clip-unified-actions)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="195" y="126" text-anchor="middle" fill="#fff" font-weight="700">actions</text>
+                </g>
+              </svg>
+            </div>
+            <p class="wam-form-blurb">All modalities and actions generated simultaneously with joint attention.</p>
+          </div>
+
+          <div class="wam-form" data-form="disjoint">
+            <div class="wam-form-title">Disjoint</div>
+            <p class="wam-form-cites"><a href="https://arxiv.org/abs/2603.16666" target="_blank" rel="noopener">Fast-WAM</a></p>
+            <div class="wam-form-card" tabindex="0" role="button" aria-label="Play Disjoint generation animation">
+              <span class="wam-form-play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3.1 1.8v8.4L10.4 6z"/></svg>Replay</span>
+              <svg class="wam-diagram" viewBox="0 0 260 148" role="img" aria-label="Disjoint formulation">
+                <defs>
+                  <marker id="arr-disjoint" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="#78898C"/>
+                  </marker>
+                  <clipPath id="clip-disjoint-m1"><rect x="16" y="110" width="48" height="26" rx="5"/></clipPath>
+                  <clipPath id="clip-disjoint-mk"><rect x="94" y="110" width="48" height="26" rx="5"/></clipPath>
+                  <clipPath id="clip-disjoint-actions"><rect x="160" y="110" width="80" height="26" rx="5"/></clipPath>
+                </defs>
+                <rect x="80" y="6" width="100" height="26" rx="5" fill="#F1F1F1" stroke="#B8B8B8" stroke-width="1.4"/>
+                <text x="130" y="23" text-anchor="middle">obs</text>
+                <line x1="130" y1="32" x2="130" y2="46" stroke="#78898C" stroke-width="1.6" marker-end="url(#arr-disjoint)"/>
+                <rect x="16" y="48" width="228" height="30" rx="5" fill="#fff" stroke="#78898C" stroke-width="1.8"/>
+                <text x="130" y="67" text-anchor="middle" fill="#78898C" font-weight="700">Shared DiT backbone</text>
+                <line x1="130" y1="78" x2="130" y2="92" stroke="#78898C" stroke-width="1.6"/>
+                <line x1="40" y1="92" x2="200" y2="92" stroke="#78898C" stroke-width="1.6"/>
+                <line class="wam-arr wam-arr-future" x1="40" y1="92" x2="40" y2="108" stroke="#78898C" stroke-width="1.6" marker-end="url(#arr-disjoint)"/>
+                <line class="wam-arr wam-arr-future" x1="118" y1="92" x2="118" y2="108" stroke="#78898C" stroke-width="1.6" marker-end="url(#arr-disjoint)"/>
+                <line x1="200" y1="92" x2="200" y2="108" stroke="#78898C" stroke-width="1.6" marker-end="url(#arr-disjoint)"/>
+                <g class="wam-token" data-token="m1">
+                  <rect class="wam-token-fill" x="16" y="110" width="48" height="26" rx="5" fill="#EFF2F2" stroke="#78898C" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="16" y="110" width="48" height="26" clip-path="url(#clip-disjoint-m1)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="40" y="127" text-anchor="middle" fill="#78898C">m₁</text>
+                </g>
+                <text x="80" y="127" text-anchor="middle" fill="#78898C" font-weight="700">···</text>
+                <g class="wam-token" data-token="mk">
+                  <rect class="wam-token-fill" x="94" y="110" width="48" height="26" rx="5" fill="#EFF2F2" stroke="#78898C" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="94" y="110" width="48" height="26" clip-path="url(#clip-disjoint-mk)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="118" y="127" text-anchor="middle" fill="#78898C">mₖ</text>
+                </g>
+                <g class="wam-token" data-token="actions">
+                  <rect class="wam-token-fill" x="160" y="110" width="80" height="26" rx="5" fill="#78898C" stroke="#78898C" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="160" y="110" width="80" height="26" clip-path="url(#clip-disjoint-actions)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="200" y="127" text-anchor="middle" fill="#fff" font-weight="700">actions</text>
+                </g>
+              </svg>
+            </div>
+            <p class="wam-form-blurb">All modalities and actions generated independently; future prediction is skipped at inference time.</p>
+          </div>
+
+          <div class="wam-form" data-form="action">
+            <div class="wam-form-title">Action-only</div>
+            <p class="wam-form-cites"><a href="https://arxiv.org/abs/2303.04137" target="_blank" rel="noopener">Diffusion Policy</a></p>
+            <div class="wam-form-card" tabindex="0" role="button" aria-label="Play Action-only generation animation">
+              <span class="wam-form-play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3.1 1.8v8.4L10.4 6z"/></svg>Replay</span>
+              <svg class="wam-diagram" viewBox="0 0 260 148" role="img" aria-label="Action-only formulation">
+                <defs>
+                  <marker id="arr-action" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="#242424"/>
+                  </marker>
+                  <clipPath id="clip-action-actions"><rect x="90" y="110" width="80" height="26" rx="5"/></clipPath>
+                </defs>
+                <rect x="80" y="6" width="100" height="26" rx="5" fill="#F1F1F1" stroke="#B8B8B8" stroke-width="1.4"/>
+                <text x="130" y="23" text-anchor="middle">obs</text>
+                <line x1="130" y1="32" x2="130" y2="46" stroke="#242424" stroke-width="1.6" marker-end="url(#arr-action)"/>
+                <rect x="50" y="48" width="160" height="30" rx="5" fill="#fff" stroke="#242424" stroke-width="1.8"/>
+                <text x="130" y="67" text-anchor="middle" fill="#242424" font-weight="700">DiT backbone</text>
+                <line x1="130" y1="78" x2="130" y2="108" stroke="#242424" stroke-width="1.6" marker-end="url(#arr-action)"/>
+                <g class="wam-token" data-token="actions">
+                  <rect class="wam-token-fill" x="90" y="110" width="80" height="26" rx="5" fill="#242424" stroke="#242424" stroke-width="1.4"/>
+                  <image class="wam-token-viz" x="90" y="110" width="80" height="26" clip-path="url(#clip-action-actions)" preserveAspectRatio="none" opacity="0"/>
+                  <text class="wam-token-label" x="130" y="127" text-anchor="middle" fill="#fff" font-weight="700">actions</text>
+                </g>
+              </svg>
+            </div>
+            <p class="wam-form-blurb">Actions generated directly. No future prediction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--/ Generation formulations. -->
+
+    <!-- Method. -->
+    <div class="page-block">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Model Architecture</h2>
+        <p class="wam-forms-hint">Click the diagram to replay the animation</p>
+        <div class="arch-card" id="arch-card" tabindex="0" role="button" aria-label="Play ModAR architecture animation">
+          <span class="arch-play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M3.1 1.8v8.4L10.4 6z"/></svg>Replay</span>
+          <svg class="arch-diagram" viewBox="0 0 900 328" role="img" aria-label="ModAR architecture">
+            <defs>
+              <marker id="arch-arr-purple" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#7140B2"/></marker>
+              <marker id="arch-arr-teal" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#2A9D8F"/></marker>
+              <marker id="arch-arr-blue" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#2B6CB0"/></marker>
+              <marker id="arch-arr-orange" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#D87828"/></marker>
+              <marker id="arch-arr-green" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#58A830"/></marker>
+              <marker id="arch-arr-ink" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#242424"/></marker>
+              <clipPath id="clip-arch-tracks"><rect x="648" y="42" width="220" height="32" rx="6"/></clipPath>
+              <clipPath id="clip-arch-dino"><rect x="648" y="92" width="220" height="32" rx="6"/></clipPath>
+              <clipPath id="clip-arch-depth"><rect x="648" y="142" width="220" height="32" rx="6"/></clipPath>
+              <clipPath id="clip-arch-rgb"><rect x="648" y="192" width="220" height="32" rx="6"/></clipPath>
+              <clipPath id="clip-arch-actions"><rect x="648" y="258" width="220" height="32" rx="6"/></clipPath>
+            </defs>
+
+            <text x="24" y="28" class="arch-kicker">Current observation</text>
+            <rect x="24" y="42" width="172" height="32" rx="6" fill="#fff" stroke="#C5CAD1" stroke-width="1.4"/>
+            <text x="110" y="63" text-anchor="middle" fill="#7140B2">DINO</text>
+            <line x1="196" y1="58" x2="254" y2="58" stroke="#7140B2" stroke-width="1.7" marker-end="url(#arch-arr-purple)"/>
+            <rect x="24" y="86" width="172" height="32" rx="6" fill="#fff" stroke="#C5CAD1" stroke-width="1.4"/>
+            <text x="110" y="107" text-anchor="middle" fill="#2A9D8F">Depth</text>
+            <line x1="196" y1="102" x2="254" y2="102" stroke="#2A9D8F" stroke-width="1.7" marker-end="url(#arch-arr-teal)"/>
+            <rect x="24" y="130" width="172" height="32" rx="6" fill="#fff" stroke="#C5CAD1" stroke-width="1.4"/>
+            <text x="110" y="151" text-anchor="middle" fill="#2B6CB0">RGB</text>
+            <line x1="196" y1="146" x2="254" y2="146" stroke="#2B6CB0" stroke-width="1.7" marker-end="url(#arch-arr-blue)"/>
+
+            <text x="24" y="190" class="arch-kicker">Global conditioning</text>
+            <rect x="24" y="204" width="172" height="32" rx="6" fill="#fff" stroke="#C5CAD1" stroke-width="1.4"/>
+            <text x="110" y="225" text-anchor="middle" fill="#444">Robot configuration</text>
+            <line x1="196" y1="220" x2="254" y2="220" stroke="#242424" stroke-width="1.7" marker-end="url(#arch-arr-ink)"/>
+            <rect x="24" y="248" width="172" height="32" rx="6" fill="#fff" stroke="#C5CAD1" stroke-width="1.4"/>
+            <text x="110" y="269" text-anchor="middle" fill="#444">Task</text>
+            <line x1="196" y1="264" x2="254" y2="264" stroke="#242424" stroke-width="1.7" marker-end="url(#arch-arr-ink)"/>
+            <text x="225" y="246" text-anchor="middle" class="arch-note">adaLN</text>
+
+            <rect x="256" y="34" width="308" height="264" rx="16" fill="#F7F8FA" stroke="#C5CAD1" stroke-width="1.6"/>
+            <rect x="274" y="56" width="272" height="62" rx="8" fill="#E8EEF4"/>
+            <text x="410" y="93" text-anchor="middle" fill="#445066" font-weight="700" font-size="14.5">Shared cross-modality blocks</text>
+            <text x="410" y="148" text-anchor="middle" fill="#8A93A0" font-size="22" font-weight="700">⋮</text>
+            <rect x="274" y="176" width="272" height="62" rx="8" fill="#E8EEF4"/>
+            <text x="410" y="213" text-anchor="middle" fill="#445066" font-weight="700" font-size="14">Modality-specific experts and heads</text>
+            <text x="410" y="276" text-anchor="middle" fill="#242424" font-weight="700">DiT</text>
+
+            <text x="648" y="28" class="arch-kicker">Modality-autoregressive generation</text>
+
+            <line class="wam-arr wam-arr-down" data-i="0" x1="564" y1="58" x2="644" y2="58" stroke="#D87828" stroke-width="1.7" marker-end="url(#arch-arr-orange)"/>
+            <path class="wam-arr wam-arr-diag" data-i="0" d="M 648,74 C 620,90 588,90 566,76" fill="none" stroke="#D87828" stroke-width="1.7" marker-end="url(#arch-arr-orange)"/>
+            <g class="wam-token" data-token="tracks">
+              <rect class="wam-token-fill" x="648" y="42" width="220" height="32" rx="6" fill="#FFF4E8" stroke="#D87828" stroke-width="1.5"/>
+              <circle cx="648" cy="58" r="5" fill="#D87828"/>
+              <image class="wam-token-viz" x="648" y="42" width="220" height="32" clip-path="url(#clip-arch-tracks)" preserveAspectRatio="none" opacity="0"/>
+              <text class="wam-token-label" x="758" y="63" text-anchor="middle" fill="#D87828">Point Tracks</text>
+            </g>
+
+            <line class="wam-arr wam-arr-down" data-i="1" x1="564" y1="108" x2="644" y2="108" stroke="#7140B2" stroke-width="1.7" marker-end="url(#arch-arr-purple)"/>
+            <path class="wam-arr wam-arr-diag" data-i="1" d="M 648,124 C 620,140 588,140 566,126" fill="none" stroke="#7140B2" stroke-width="1.7" marker-end="url(#arch-arr-purple)"/>
+            <g class="wam-token" data-token="dino">
+              <rect class="wam-token-fill" x="648" y="92" width="220" height="32" rx="6" fill="#F3ECFA" stroke="#7140B2" stroke-width="1.5"/>
+              <circle cx="648" cy="108" r="5" fill="#7140B2"/>
+              <image class="wam-token-viz" x="648" y="92" width="220" height="32" clip-path="url(#clip-arch-dino)" preserveAspectRatio="none" opacity="0"/>
+              <text class="wam-token-label" x="758" y="113" text-anchor="middle" fill="#7140B2">Future DINO</text>
+            </g>
+
+            <line class="wam-arr wam-arr-down" data-i="2" x1="564" y1="158" x2="644" y2="158" stroke="#58A830" stroke-width="1.7" marker-end="url(#arch-arr-green)"/>
+            <path class="wam-arr wam-arr-diag" data-i="2" d="M 648,174 C 620,190 588,190 566,176" fill="none" stroke="#58A830" stroke-width="1.7" marker-end="url(#arch-arr-green)"/>
+            <g class="wam-token" data-token="depth">
+              <rect class="wam-token-fill" x="648" y="142" width="220" height="32" rx="6" fill="#EEF7E8" stroke="#58A830" stroke-width="1.5"/>
+              <circle cx="648" cy="158" r="5" fill="#58A830"/>
+              <image class="wam-token-viz" x="648" y="142" width="220" height="32" clip-path="url(#clip-arch-depth)" preserveAspectRatio="none" opacity="0"/>
+              <text class="wam-token-label" x="758" y="163" text-anchor="middle" fill="#58A830">Future Depth</text>
+            </g>
+
+            <line class="wam-arr wam-arr-down" data-i="3" x1="564" y1="208" x2="644" y2="208" stroke="#2B6CB0" stroke-width="1.7" marker-end="url(#arch-arr-blue)"/>
+            <path class="wam-arr wam-arr-diag" data-i="3" d="M 648,224 C 620,240 588,240 566,226" fill="none" stroke="#2B6CB0" stroke-width="1.7" marker-end="url(#arch-arr-blue)"/>
+            <g class="wam-token" data-token="rgb">
+              <rect class="wam-token-fill" x="648" y="192" width="220" height="32" rx="6" fill="#EAF2FB" stroke="#2B6CB0" stroke-width="1.5"/>
+              <circle cx="648" cy="208" r="5" fill="#2B6CB0"/>
+              <image class="wam-token-viz" x="648" y="192" width="220" height="32" clip-path="url(#clip-arch-rgb)" preserveAspectRatio="none" opacity="0"/>
+              <text class="wam-token-label" x="758" y="213" text-anchor="middle" fill="#2B6CB0">Future RGB</text>
+            </g>
+
+            <line class="wam-arr wam-arr-down" data-i="4" x1="564" y1="274" x2="644" y2="274" stroke="#242424" stroke-width="1.7" marker-end="url(#arch-arr-ink)"/>
+            <g class="wam-token" data-token="actions">
+              <rect class="wam-token-fill" x="648" y="258" width="220" height="32" rx="6" fill="#242424" stroke="#242424" stroke-width="1.5"/>
+              <image class="wam-token-viz" x="648" y="258" width="220" height="32" clip-path="url(#clip-arch-actions)" preserveAspectRatio="none" opacity="0"/>
+              <text class="wam-token-label" x="758" y="279" text-anchor="middle" fill="#fff" font-weight="700">Robot Actions</text>
+            </g>
+          </svg>
+        </div>
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            Current DINO, depth, and RGB observations are embedded into tokens and
+            processed by a shared diffusion transformer (DiT). The DiT combines shared
+            cross-modality blocks with modality-specific experts and output heads.
+            Robot configuration and a learned task embedding condition every DiT layer
+            through adaLN. ModAR then denoises point tracks, DINO, depth, and RGB
+            sequentially—each conditioned on earlier denoised modalities—and predicts
+            robot actions last.
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--/ Method. -->
+
+    <!-- Results: Simulation -->
+    <div class="page-block">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results: Simulation</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-5">WAM Formulation Comparison</h3>
+        <div style="max-width: 640px; margin: 0 auto;">
+          <canvas id="formChart"></canvas>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Average success rate over six RoboTwin tasks.
+          <b>All models are trained with 50 action-labeled demonstrations per task</b>.
+          We then add demonstrations with their action labels removed to increase
+          the total demonstration count from 50 to 250 to 1,250.
+          <span style="color: #00BFC4; font-weight: 700;">Independent-noise</span>
+          uses the same simultaneous generation as
+          <span style="color: #7B3294; font-weight: 700;">Unified</span>
+          at inference, but
+          samples a separate flow timestep for each modality at each training
+          step, following
+          <a href="https://arxiv.org/abs/2608.10860" target="_blank" rel="noopener">Flex-π</a>.
+          <span style="color: #E41A1C; font-weight: 700;">ModAR achieves the highest average success rate at every data scale
+          and benefits most from the additional actionless data.</span>
+        </p>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered" style="margin-top: 1.5rem;">
+      <div class="column is-four-fifths">
+        <h3 class="title is-5">Predicted Modality Set Comparison</h3>
+        <div style="max-width: 720px; margin: 0 auto;">
+          <canvas id="modChart"></canvas>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Average success rate for ModAR models trained with individual modalities
+          and progressively larger modality sets, following the generation order
+          tracks &rarr; DINO &rarr; depth &rarr; RGB.
+          <b>We find it beneficial to predict future tracks, DINO, and depth, while
+          additionally predicting RGB provides no consistent gain.</b>
+        </p>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered" style="margin-top: 1.5rem;">
+      <div class="column is-four-fifths">
+        <h3 class="title is-5">Comparison to a video-model-initialized WAM</h3>
+        <div class="flexpi-compare" aria-label="ModAR versus Flex-π on the same RoboTwin data">
+          <div class="flexpi-compare-head">
+            <div class="flexpi-compare-spacer"></div>
+            <div class="flexpi-compare-method is-modar">ModAR</div>
+            <div class="flexpi-compare-method is-flex">Flex-π</div>
+            <div class="flexpi-compare-delta-head"></div>
+          </div>
+          <div class="flexpi-compare-row">
+            <div class="flexpi-compare-label">Success rate</div>
+            <div class="flexpi-compare-value is-modar">75%</div>
+            <div class="flexpi-compare-value is-flex">72%</div>
+            <div class="flexpi-compare-delta">+3 points</div>
+          </div>
+          <div class="flexpi-compare-row">
+            <div class="flexpi-compare-label">Parameters</div>
+            <div class="flexpi-compare-value is-modar">30.1M</div>
+            <div class="flexpi-compare-value is-flex">6B</div>
+            <div class="flexpi-compare-delta">~200× smaller</div>
+          </div>
+          <div class="flexpi-compare-row">
+            <div class="flexpi-compare-label">Training FLOPs</div>
+            <div class="flexpi-compare-value is-modar">1×</div>
+            <div class="flexpi-compare-value is-flex">~20×</div>
+            <div class="flexpi-compare-delta">~20× less compute</div>
+          </div>
+        </div>
+        <p style="margin-top: 0.85rem; font-size: 0.9rem;">
+          We fine-tune
+          <a href="https://arxiv.org/abs/2608.10860" target="_blank" rel="noopener">Flex-π</a>,
+          initialized from the Wan2.2-TI2V-5B video model, on the same RoboTwin
+          data at the 250-total-demonstration scale (50 action-labeled).
+          ModAR reaches a slightly higher average success rate with approximately
+          200× fewer parameters, 20× fewer training FLOPs, and no pretraining.
+        </p>
+      </div>
+    </div>
+    </div>
+    <!--/ Results: Simulation -->
+
+    <!-- Ablations. -->
+    <div class="page-block">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Simulation Ablations</h2>
+        <div style="max-width: 680px; margin: 0 auto;">
+          <canvas id="ablationChart"></canvas>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Average success rate over six RoboTwin tasks at the 250-demonstration
+          scale (50 action-labeled).
+          <span style="color: #6B8E23; font-weight: 700;">Context noise</span>
+          (noise added to previously generated modalities during training)
+          is critical for robust autoregressive generation.
+          <span style="color: #377EB8; font-weight: 700;">Reversing the generation order</span>
+          to RGB &rarr; depth &rarr; DINO &rarr; tracks
+          also reduces performance, supporting the choice to generate compact,
+          structured modalities first.
+          Removing
+          <span style="color: #B8860B; font-weight: 700;">tracks</span>,
+          <span style="color: #006400; font-weight: 700;">DINO</span>, or
+          <span style="color: #DB7093; font-weight: 700;">depth</span>
+          hurts more than removing
+          <span style="color: #CC9900; font-weight: 700;">RGB</span>.
+        </p>
+      </div>
+    </div>
+    </div>
+    <!--/ Ablations. -->
+
+    <!-- Results: Real World -->
+    <div class="page-block">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results: Real-World Bimanual Manipulation</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h3 class="title is-5">Real-World Training Data</h3>
+        <div class="data-mix" id="data-mix">
+          <div class="modar-hero-tasks">
+            <button class="modar-hero-task is-active" type="button" data-mix-task="stack">Stack cups</button>
+            <button class="modar-hero-task" type="button" data-mix-task="fold">Fold towel</button>
+            <button class="modar-hero-task" type="button" data-mix-task="drawer">Place in drawer</button>
+          </div>
+          <div class="data-mix-sources">
+            <div class="data-mix-card is-on" data-mix-source="robot">
+              <div class="data-mix-card-head">
+                <div class="data-mix-card-title">Robot</div>
+                <div class="data-mix-card-count">100 demos</div>
+              </div>
+              <div class="data-mix-panel">
+                <video class="data-mix-video" muted playsinline preload="auto"></video>
+              </div>
+              <div class="data-mix-card-state"><span data-mix-index>1</span> / 10</div>
+            </div>
+            <div class="data-mix-card is-on" data-mix-source="id">
+              <div class="data-mix-card-head">
+                <div class="data-mix-card-title">ID human</div>
+                <div class="data-mix-card-count">200 demos</div>
+              </div>
+              <div class="data-mix-panel">
+                <video class="data-mix-video" muted playsinline preload="auto"></video>
+              </div>
+              <div class="data-mix-card-state"><span data-mix-index>1</span> / 10</div>
+            </div>
+            <div class="data-mix-card is-on" data-mix-source="ood">
+              <div class="data-mix-card-head">
+                <div class="data-mix-card-title"><a href="https://arxiv.org/abs/2505.11709" target="_blank" rel="noopener">EgoDex</a> (OOD Human)</div>
+                <div class="data-mix-card-count">1,000 demos</div>
+              </div>
+              <div class="data-mix-panel">
+                <video class="data-mix-video" muted playsinline preload="auto"></video>
+              </div>
+              <div class="data-mix-card-state"><span data-mix-index>1</span> / 10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered" style="margin-top: 1.5rem;">
+      <div class="column is-four-fifths">
+        <h3 class="title is-5">Formulation Comparison</h3>
+        <div style="max-width: 600px; margin: 0 auto;">
+          <canvas id="realFormChart"></canvas>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Real-world success rates with 30 trials per method per task.
+          All methods use 100 robot demonstrations per task; ModAR and Unified
+          additionally use 200 in-domain actionless human demonstrations and
+          1,000 out-of-domain <a href="https://arxiv.org/abs/2505.11709" target="_blank" rel="noopener">EgoDex</a> demonstrations.
+          Real-world WAMs observe and predict tracks, DINO, and depth.
+          ModAR achieves the highest success rate on all three tasks.
+        </p>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered" style="margin-top: 1.5rem;">
+      <div class="column is-four-fifths">
+        <h3 class="title is-5">Learning from Actionless Human Data</h3>
+        <div style="max-width: 600px; margin: 0 auto;">
+          <canvas id="realDataChart"></canvas>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+          We train separate ModAR models with just 100 robot demonstrations
+          per task, then adding 200 in-domain actionless human demonstrations
+          (used to supervise future-observation predictions, but not action
+          prediction), and then also adding 1,000 out-of-domain human
+          demonstrations from <a href="https://arxiv.org/abs/2505.11709" target="_blank" rel="noopener">EgoDex</a> (used similarly).
+          The average success rate progressively improves from 70.0% to 81.1%
+          to 83.3%.
+        </p>
+      </div>
+    </div>
+    </div>
+    <!--/ Results: Real World -->
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="page-block is-unboxed">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified">
+          <p>We thank Narek Harutyunyan for assistance in data collection. This work is supported by the NSF GRFP (Grant Nos. DGE2140739 and DGE2631988). This work used Bridges-2 at Pittsburgh Supercomputing Center through ACCESS allocation CIS260202p.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="page-block is-unboxed">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{modar,
+  title={Modality-Autoregressive World-Action Models},
+  author={Hung, Adam and Duisterhof, Bardienus P. and Ramanan, Deva and Ichnowski, Jeffrey},
+  year={2026}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Website template: <a href="https://github.com/nerfies/nerfies.github.io">https://github.com/nerfies/nerfies.github.io</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var fontFamily = "'Noto Sans', sans-serif";
+
+  var datalabelPlugin = {
+    id: 'barLabels',
+    afterDatasetsDraw: function(chart) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function(dataset, i) {
+        var meta = chart.getDatasetMeta(i);
+        if (meta.hidden || meta.type === 'line') return;
+        meta.data.forEach(function(bar, index) {
+          var value = dataset.data[index];
+          if (value === null || value === undefined) return;
+          ctx.save();
+          ctx.font = 'bold 11px ' + fontFamily;
+          ctx.fillStyle = '#333';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          var decimals = chart.config.options._labelDecimals !== undefined ? chart.config.options._labelDecimals : 0;
+          ctx.fillText(value.toFixed(decimals), bar.x, bar.y - 4);
+          ctx.restore();
+        });
+      });
+    }
+  };
+
+  var actionOnlyLinePlugin = {
+    id: 'actionOnlyLine',
+    afterDraw: function(chart) {
+      var opts = chart.options.plugins && chart.options.plugins.actionOnlyLine;
+      if (!opts || opts.y == null || !chart.chartArea) return;
+      var y = chart.scales.y.getPixelForValue(opts.y);
+      var area = chart.chartArea;
+      var ctx = chart.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.setLineDash([7, 5]);
+      ctx.strokeStyle = '#555555';
+      ctx.lineWidth = 1.75;
+      ctx.moveTo(area.left, y);
+      ctx.lineTo(area.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#333';
+      ctx.font = '11px ' + fontFamily;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(opts.y), area.right + 6, y);
+      ctx.restore();
+    }
+  };
+
+  var sharedOptions = function(xTitle, maxY, decimals, actionOnlyY) {
+    return {
+      _labelDecimals: decimals,
+      responsive: true,
+      layout: { padding: { top: 20, right: actionOnlyY != null ? 28 : 0 } },
+      animation: { duration: 600, easing: 'easeOutQuart' },
+      plugins: {
+        actionOnlyLine: { y: actionOnlyY },
+        legend: {
+          position: 'bottom',
+          onClick: function() {},
+          labels: {
+            font: { family: fontFamily, size: 11 },
+            usePointStyle: true,
+            pointStyle: 'rectRounded',
+            padding: 15,
+            generateLabels: function(chart) {
+              var items = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+              if (actionOnlyY == null) return items;
+              items.unshift({
+                text: 'Action-only',
+                fillStyle: 'transparent',
+                strokeStyle: '#555555',
+                lineWidth: 2,
+                lineDash: [6, 4],
+                pointStyle: 'line',
+                datasetIndex: -1
+              });
+              return items;
+            }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(decimals) + '%'; }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: maxY,
+          title: { display: true, text: 'Success Rate (%)', font: { family: fontFamily, size: 12 } },
+          grid: { color: 'rgba(0,0,0,0.08)', drawBorder: false },
+          ticks: { font: { family: fontFamily, size: 11 } }
+        },
+        x: {
+          title: { display: true, text: xTitle, font: { family: fontFamily, size: 12 } },
+          grid: { display: false },
+          ticks: { font: { family: fontFamily, size: 12 } }
+        }
+      }
+    };
+  };
+
+  new Chart(document.getElementById('formChart'), {
+    type: 'bar',
+    plugins: [datalabelPlugin, actionOnlyLinePlugin],
+    data: {
+      labels: ['50', '250', '1250'],
+      datasets: [
+        {
+          label: 'Independent-noise',
+          data: [37, 34, 33],
+          backgroundColor: 'rgba(0, 191, 196, 0.9)',
+          borderColor: 'rgba(0, 191, 196, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Disjoint',
+          data: [55, 55, 48],
+          backgroundColor: 'rgba(120, 120, 120, 0.9)',
+          borderColor: 'rgba(120, 120, 120, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Unified',
+          data: [63, 67, 64],
+          backgroundColor: 'rgba(123, 50, 148, 0.9)',
+          borderColor: 'rgba(123, 50, 148, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'ModAR',
+          data: [66, 75, 76],
+          backgroundColor: 'rgba(228, 26, 28, 0.9)',
+          borderColor: 'rgba(228, 26, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        }
+      ]
+    },
+    options: sharedOptions('Total demonstrations per task', 100, 0, 46)
+  });
+
+  new Chart(document.getElementById('modChart'), {
+    type: 'bar',
+    plugins: [datalabelPlugin, actionOnlyLinePlugin],
+    data: {
+      labels: ['50', '250', '1250'],
+      datasets: [
+        {
+          label: 'RGB',
+          data: [43, 54, 58],
+          backgroundColor: 'rgba(31, 119, 180, 0.9)',
+          borderColor: 'rgba(31, 119, 180, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Depth',
+          data: [46, 63, 56],
+          backgroundColor: 'rgba(140, 140, 140, 0.9)',
+          borderColor: 'rgba(140, 140, 140, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Tracks',
+          data: [41, 53, 61],
+          backgroundColor: 'rgba(233, 150, 180, 0.9)',
+          borderColor: 'rgba(233, 150, 180, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'DINO',
+          data: [60, 65, 68],
+          backgroundColor: 'rgba(44, 160, 44, 0.9)',
+          borderColor: 'rgba(44, 160, 44, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Tracks–DINO',
+          data: [63, 72, 72],
+          backgroundColor: 'rgba(135, 206, 235, 0.95)',
+          borderColor: 'rgba(70, 160, 200, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Tracks–DINO–Depth',
+          data: [63, 75, 77],
+          backgroundColor: 'rgba(255, 191, 0, 0.9)',
+          borderColor: 'rgba(218, 165, 32, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Tracks–DINO–Depth–RGB',
+          data: [66, 75, 76],
+          backgroundColor: 'rgba(228, 26, 28, 0.9)',
+          borderColor: 'rgba(228, 26, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        }
+      ]
+    },
+    options: sharedOptions('Total demonstrations per task', 100, 0, 46)
+  });
+
+  new Chart(document.getElementById('realFormChart'), {
+    type: 'bar',
+    plugins: [datalabelPlugin],
+    data: {
+      labels: ['Stack cups', 'Fold towel', 'Place in drawer', 'Overall'],
+      datasets: [
+        {
+          label: 'Action-only',
+          data: [50.0, 50.0, 56.7, 52.2],
+          backgroundColor: 'rgba(80, 80, 80, 0.9)',
+          borderColor: 'rgba(80, 80, 80, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'Unified',
+          data: [60.0, 70.0, 70.0, 66.7],
+          backgroundColor: 'rgba(123, 50, 148, 0.9)',
+          borderColor: 'rgba(123, 50, 148, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'ModAR',
+          data: [83.3, 83.3, 83.3, 83.3],
+          backgroundColor: 'rgba(228, 26, 28, 0.9)',
+          borderColor: 'rgba(228, 26, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        }
+      ]
+    },
+    options: sharedOptions('Task', 100, 1)
+  });
+
+  new Chart(document.getElementById('realDataChart'), {
+    type: 'bar',
+    plugins: [datalabelPlugin],
+    data: {
+      labels: ['Stack cups', 'Fold towel', 'Place in drawer', 'Overall'],
+      datasets: [
+        {
+          label: 'ModAR',
+          data: [70.0, 66.7, 73.3, 70.0],
+          backgroundColor: 'rgba(228, 26, 28, 0.25)',
+          borderColor: 'rgba(228, 26, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'ModAR (+ID human)',
+          data: [83.3, 80.0, 80.0, 81.1],
+          backgroundColor: 'rgba(228, 26, 28, 0.55)',
+          borderColor: 'rgba(228, 26, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        },
+        {
+          label: 'ModAR (+ID, +OOD human)',
+          data: [83.3, 83.3, 83.3, 83.3],
+          backgroundColor: 'rgba(228, 26, 28, 0.9)',
+          borderColor: 'rgba(228, 26, 28, 1)',
+          borderWidth: 1,
+          borderRadius: 2
+        }
+      ]
+    },
+    options: sharedOptions('Task', 100, 1)
+  });
+
+  new Chart(document.getElementById('ablationChart'), {
+    type: 'bar',
+    plugins: [datalabelPlugin],
+    data: {
+      labels: ['ModAR', 'No context noise', 'Reverse order', 'w/o tracks', 'w/o DINO', 'w/o depth', 'w/o RGB'],
+      datasets: [
+        {
+          label: 'Average success rate',
+          data: [75, 63, 65, 61, 65, 70, 75],
+          backgroundColor: [
+            'rgba(228, 26, 28, 0.9)',
+            'rgba(107, 142, 35, 0.9)',
+            'rgba(55, 126, 184, 0.9)',
+            'rgba(184, 134, 11, 0.9)',
+            'rgba(0, 100, 0, 0.9)',
+            'rgba(219, 112, 147, 0.9)',
+            'rgba(255, 191, 0, 0.9)'
+          ],
+          borderColor: [
+            'rgba(228, 26, 28, 1)',
+            'rgba(107, 142, 35, 1)',
+            'rgba(55, 126, 184, 1)',
+            'rgba(184, 134, 11, 1)',
+            'rgba(0, 100, 0, 1)',
+            'rgba(219, 112, 147, 1)',
+            'rgba(218, 165, 32, 1)'
+          ],
+          borderWidth: 1,
+          borderRadius: 2
+        }
+      ]
+    },
+    options: (function() {
+      var opts = sharedOptions('', 100, 0);
+      opts.plugins.legend.display = false;
+      opts.scales.x.ticks.font = { family: fontFamily, size: 11 };
+      opts.scales.x.ticks.maxRotation = 30;
+      opts.scales.x.ticks.minRotation = 0;
+      return opts;
+    })()
+  });
+});
+</script>
+
+</body>
+</html>

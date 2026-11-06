@@ -1,0 +1,41 @@
+{
+  "method": "Cascaded_3-mod_human_robot_data",
+  "target_per_task": 8,
+  "counts": {
+    "stack": 8,
+    "fold": 8,
+    "drawer": 8
+  },
+  "tasks": {
+    "stack": [
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_145421_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144521_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144327_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144137_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144207_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144234_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144422_success.mp4",
+      "stack_cups/Cascaded_3-mod_human_robot_data/20260910_144304_success.mp4"
+    ],
+    "fold": [
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_131932_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_132032_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_132151_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_132322_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_132400_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_132441_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260827_132521_success.mp4",
+      "fold_towel/Cascaded_3-mod_human_robot_data/20260910_153352_success.mp4"
+    ],
+    "drawer": [
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260910_155827_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260910_155735_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260910_155716_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260910_155627_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260910_155610_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260827_134438_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260827_134455_success.mp4",
+      "place_in_drawer/Cascaded_3-mod_human_robot_data/20260827_134533_success.mp4"
+    ]
+  }
+}

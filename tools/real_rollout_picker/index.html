@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ModAR real-world rollout picker</title>
+  <style>
+    :root {
+      --bg: #101114;
+      --panel: #1a1c21;
+      --panel-2: #22252c;
+      --line: #333843;
+      --text: #f2f3f5;
+      --muted: #9aa3b2;
+      --accent: #3d8bfd;
+      --good: #2f9e44;
+      --warn: #f08c00;
+      --new: #be4bdb;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "IBM Plex Sans", "Noto Sans", sans-serif;
+      min-height: 100%;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(16, 17, 20, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 0.9rem 1.25rem 0.75rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 650;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 0.2rem;
+    }
+
+    .counts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .count-pill, .tab, button, .slot {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    .count-pill {
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      font-size: 0.82rem;
+    }
+
+    .count-pill.ready { border-color: var(--good); color: #b2f2bb; }
+    .count-pill.over { border-color: #fa5252; color: #ffc9c9; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    button {
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.86rem;
+    }
+
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    main {
+      padding: 1rem 1.25rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+
+    .tab {
+      border-radius: 8px;
+      padding: 0.45rem 0.8rem;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #2b3344;
+      border-color: var(--accent);
+    }
+
+    .selected-strip {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .slot {
+      min-height: 4.6rem;
+      border-radius: 8px;
+      padding: 0.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .slot.filled { border-color: var(--good); }
+    .slot-num { font-size: 0.72rem; color: var(--muted); }
+    .slot-label { font-size: 0.72rem; line-height: 1.25; word-break: break-all; }
+    .slot-btns { display: flex; gap: 0.25rem; }
+    .slot-btns button { padding: 0.15rem 0.35rem; font-size: 0.72rem; }
+
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .card.selected { border-color: var(--good); box-shadow: inset 0 0 0 1px var(--good); }
+    .card.locked { opacity: 0.55; }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.55rem 0.75rem;
+    }
+
+    .meta { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+    .stamp { font-weight: 600; font-size: 0.92rem; }
+    .badge {
+      font-size: 0.72rem;
+      border-radius: 999px;
+      padding: 0.12rem 0.45rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .badge.new { border-color: var(--new); color: #e599f0; }
+    .badge.pick { border-color: var(--good); color: #b2f2bb; }
+
+    video {
+      width: 100%;
+      display: block;
+      background: #000;
+      aspect-ratio: 1792 / 294;
+    }
+
+    .status {
+      margin-top: 0.7rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Real-world rollout picker</h1>
+    <p class="sub">
+      Cascaded 3-mod human+robot successes. Pick 8 favorites per task for the
+      ModAR real-world rollout section. Hover a clip to play; click Select to keep it.
+    </p>
+    <div class="counts" id="counts"></div>
+    <div class="actions">
+      <button class="primary" id="save-btn" type="button">Save selection</button>
+      <button id="download-btn" type="button">Download JSON</button>
+      <button id="clear-btn" type="button">Clear this task</button>
+      <button id="new-only-btn" type="button">Show new only</button>
+    </div>
+    <div class="status" id="status"></div>
+  </header>
+  <main>
+    <div class="tabs" id="tabs"></div>
+    <div class="selected-strip" id="strip"></div>
+    <div class="grid" id="grid"></div>
+  </main>
+  <script>
+    const TARGET = 8;
+    const TASK_ORDER = ["stack_cups", "fold_towel", "place_in_drawer"];
+    const STORE_KEY = "modar-real-rollout-picks-v1";
+
+    const state = {
+      manifest: null,
+      task: "stack_cups",
+      selected: { stack_cups: [], fold_towel: [], place_in_drawer: [] },
+      playing: null,
+      newOnly: false,
+    };
+
+    function loadLocal() {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      TASK_ORDER.forEach((task) => {
+        if (Array.isArray(parsed[task])) state.selected[task] = parsed[task];
+      });
+    }
+
+    function persistLocal() {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state.selected));
+    }
+
+    function videosFor(task) {
+      return state.manifest.videos
+        .filter((video) => video.task === task)
+        .filter((video) => !state.newOnly || video.new)
+        .slice()
+        .sort((a, b) => b.stamp.localeCompare(a.stamp));
+    }
+
+    function selectedSet(task) {
+      return new Set(state.selected[task]);
+    }
+
+    function formatDur(seconds) {
+      return seconds.toFixed(1) + "s";
+    }
+
+    function renderCounts() {
+      const host = document.getElementById("counts");
+      host.innerHTML = TASK_ORDER.map((task) => {
+        const n = state.selected[task].length;
+        const label = state.manifest.tasks.find((row) => row.id === task).label;
+        const cls = n === TARGET ? " ready" : n > TARGET ? " over" : "";
+        return `<span class="count-pill${cls}">${label}: ${n}/${TARGET}</span>`;
+      }).join("");
+    }
+
+    function renderTabs() {
+      const host = document.getElementById("tabs");
+      host.innerHTML = TASK_ORDER.map((task) => {
+        const meta = state.manifest.tasks.find((row) => row.id === task);
+        const active = task === state.task ? " active" : "";
+        return `<button class="tab${active}" data-task="${task}" type="button">${meta.label} (${meta.count})</button>`;
+      }).join("");
+      host.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.task = btn.dataset.task;
+          render();
+        });
+      });
+    }
+
+    function renderStrip() {
+      const host = document.getElementById("strip");
+      const picks = state.selected[state.task];
+      host.innerHTML = Array.from({ length: TARGET }, (_, i) => {
+        const id = picks[i];
+        if (!id) {
+          return `<div class="slot"><div class="slot-num">${i + 1}</div><div class="slot-label">empty</div></div>`;
+        }
+        const stamp = id.split("/")[1];
+        return `<div class="slot filled">
+          <div class="slot-num">${i + 1}</div>
+          <div class="slot-label">${stamp}</div>
+          <div class="slot-btns">
+            <button type="button" data-move="${id}" data-dir="-1">←</button>
+            <button type="button" data-move="${id}" data-dir="1">→</button>
+            <button type="button" data-drop="${id}">✕</button>
+          </div>
+        </div>`;
+      }).join("");
+      host.querySelectorAll("[data-move]").forEach((btn) => {
+        btn.addEventListener("click", () => movePick(btn.dataset.move, Number(btn.dataset.dir)));
+      });
+      host.querySelectorAll("[data-drop]").forEach((btn) => {
+        btn.addEventListener("click", () => toggle(btn.dataset.drop));
+      });
+    }
+
+    function renderGrid() {
+      const host = document.getElementById("grid");
+      const picks = selectedSet(state.task);
+      const full = picks.size >= TARGET;
+      host.innerHTML = videosFor(state.task).map((video) => {
+        const on = picks.has(video.id);
+        const locked = full && !on;
+        const rank = on ? state.selected[state.task].indexOf(video.id) + 1 : 0;
+        return `<article class="card${on ? " selected" : ""}${locked ? " locked" : ""}" data-id="${video.id}">
+          <div class="card-head">
+            <div class="meta">
+              <span class="stamp">${video.label}</span>
+              <span class="badge">${formatDur(video.duration)}</span>
+              ${video.new ? '<span class="badge new">new</span>' : ""}
+              ${on ? `<span class="badge pick">#${rank}</span>` : ""}
+            </div>
+            <button type="button" data-toggle="${video.id}">${on ? "Remove" : "Select"}</button>
+          </div>
+          <video
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster="${video.poster}"
+            data-src="${video.src}"
+            data-video-id="${video.id}"></video>
+        </article>`;
+      }).join("");
+      host.querySelectorAll("[data-toggle]").forEach((btn) => {
+        btn.addEventListener("click", () => toggle(btn.dataset.toggle));
+      });
+      host.querySelectorAll("video").forEach((video) => {
+        const src = video.dataset.src;
+        video.addEventListener("mouseenter", () => playOne(video, src));
+        video.addEventListener("focus", () => playOne(video, src));
+        video.addEventListener("click", () => playOne(video, src));
+      });
+    }
+
+    function playOne(video, src) {
+      if (state.playing && state.playing !== video) {
+        state.playing.pause();
+      }
+      if (!video.getAttribute("src")) {
+        video.src = src;
+        video.load();
+      }
+      video.play();
+      state.playing = video;
+    }
+
+    function toggle(id) {
+      const task = id.split("/")[0];
+      const list = state.selected[task];
+      const idx = list.indexOf(id);
+      if (idx >= 0) {
+        list.splice(idx, 1);
+      } else if (list.length < TARGET) {
+        list.push(id);
+      } else {
+        setStatus(`${task} already has ${TARGET} picks. Remove one first.`);
+        return;
+      }
+      persistLocal();
+      render();
+    }
+
+    function movePick(id, dir) {
+      const task = id.split("/")[0];
+      const list = state.selected[task];
+      const idx = list.indexOf(id);
+      const next = idx + dir;
+      if (idx < 0 || next < 0 || next >= list.length) return;
+      const [item] = list.splice(idx, 1);
+      list.splice(next, 0, item);
+      persistLocal();
+      render();
+    }
+
+    function setStatus(text) {
+      document.getElementById("status").textContent = text;
+    }
+
+    function payload() {
+      const videosById = Object.fromEntries(
+        state.manifest.videos.map((video) => [video.id, video])
+      );
+      const tasks = {};
+      TASK_ORDER.forEach((task) => {
+        tasks[task] = state.selected[task].map((id) => videosById[id]);
+      });
+      return {
+        method: state.manifest.method,
+        target_per_task: TARGET,
+        complete: TASK_ORDER.every((task) => state.selected[task].length === TARGET),
+        selected_ids: state.selected,
+        tasks,
+      };
+    }
+
+    async function saveSelection() {
+      const body = payload();
+      const response = await fetch("/api/selection", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body, null, 2),
+      });
+      const result = await response.json();
+      setStatus(`Saved ${result.path}\n${summarize()}`);
+    }
+
+    function downloadSelection() {
+      const blob = new Blob([JSON.stringify(payload(), null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "real_rollout_selection.json";
+      a.click();
+      URL.revokeObjectURL(url);
+      setStatus("Downloaded real_rollout_selection.json");
+    }
+
+    function summarize() {
+      return TASK_ORDER.map((task) => {
+        const n = state.selected[task].length;
+        return `${task}: ${n}/${TARGET}`;
+      }).join("  ");
+    }
+
+    function render() {
+      renderCounts();
+      renderTabs();
+      renderStrip();
+      renderGrid();
+      const body = payload();
+      document.getElementById("save-btn").textContent = body.complete
+        ? "Save selection"
+        : "Save selection (partial)";
+      if (!document.getElementById("status").textContent) {
+        setStatus(summarize());
+      }
+    }
+
+    document.getElementById("save-btn").addEventListener("click", saveSelection);
+    document.getElementById("download-btn").addEventListener("click", downloadSelection);
+    document.getElementById("clear-btn").addEventListener("click", () => {
+      state.selected[state.task] = [];
+      persistLocal();
+      setStatus("");
+      render();
+    });
+    document.getElementById("new-only-btn").addEventListener("click", () => {
+      state.newOnly = !state.newOnly;
+      document.getElementById("new-only-btn").textContent =
+        state.newOnly ? "Show all" : "Show new only";
+      render();
+    });
+
+    fetch("/manifest.json")
+      .then((response) => response.json())
+      .then((manifest) => {
+        state.manifest = manifest;
+        loadLocal();
+        TASK_ORDER.forEach((task) => {
+          const valid = new Set(
+            state.manifest.videos
+              .filter((video) => video.task === task)
+              .map((video) => video.id)
+          );
+          state.selected[task] = state.selected[task].filter((id) => valid.has(id));
+        });
+        persistLocal();
+        render();
+      });
+  </script>
+</body>
+</html>

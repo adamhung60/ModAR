@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+tools/real_rollout_picker/videos/
+tools/real_rollout_picker/posters/
+tools/real_rollout_picker/web/
+scripts/__pycache__/

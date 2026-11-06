@@ -1,0 +1,574 @@
+{
+  "n_clips": 10,
+  "size": [
+    448,
+    252
+  ],
+  "fps": 10.0,
+  "sources": {
+    "robot": {
+      "stack": [
+        {
+          "demo": "demo_000028",
+          "n_frames": 35,
+          "seconds": 4.67,
+          "path": "static/mixture/robot/stack/00.mp4"
+        },
+        {
+          "demo": "demo_000033",
+          "n_frames": 27,
+          "seconds": 3.6,
+          "path": "static/mixture/robot/stack/01.mp4"
+        },
+        {
+          "demo": "demo_000080",
+          "n_frames": 31,
+          "seconds": 4.13,
+          "path": "static/mixture/robot/stack/02.mp4"
+        },
+        {
+          "demo": "demo_000045",
+          "n_frames": 29,
+          "seconds": 3.87,
+          "path": "static/mixture/robot/stack/03.mp4"
+        },
+        {
+          "demo": "demo_000067",
+          "n_frames": 28,
+          "seconds": 3.73,
+          "path": "static/mixture/robot/stack/04.mp4"
+        },
+        {
+          "demo": "demo_000035",
+          "n_frames": 35,
+          "seconds": 4.67,
+          "path": "static/mixture/robot/stack/05.mp4"
+        },
+        {
+          "demo": "demo_000061",
+          "n_frames": 29,
+          "seconds": 3.87,
+          "path": "static/mixture/robot/stack/06.mp4"
+        },
+        {
+          "demo": "demo_000021",
+          "n_frames": 35,
+          "seconds": 4.69,
+          "path": "static/mixture/robot/stack/07.mp4"
+        },
+        {
+          "demo": "demo_000042",
+          "n_frames": 31,
+          "seconds": 4.13,
+          "path": "static/mixture/robot/stack/08.mp4"
+        },
+        {
+          "demo": "demo_000059",
+          "n_frames": 26,
+          "seconds": 3.47,
+          "path": "static/mixture/robot/stack/09.mp4"
+        }
+      ],
+      "fold": [
+        {
+          "demo": "demo_000001",
+          "n_frames": 104,
+          "seconds": 13.87,
+          "path": "static/mixture/robot/fold/00.mp4"
+        },
+        {
+          "demo": "demo_000103",
+          "n_frames": 56,
+          "seconds": 7.47,
+          "path": "static/mixture/robot/fold/01.mp4"
+        },
+        {
+          "demo": "demo_000091",
+          "n_frames": 53,
+          "seconds": 7.07,
+          "path": "static/mixture/robot/fold/02.mp4"
+        },
+        {
+          "demo": "demo_000079",
+          "n_frames": 56,
+          "seconds": 7.47,
+          "path": "static/mixture/robot/fold/03.mp4"
+        },
+        {
+          "demo": "demo_000109",
+          "n_frames": 48,
+          "seconds": 6.4,
+          "path": "static/mixture/robot/fold/04.mp4"
+        },
+        {
+          "demo": "demo_000067",
+          "n_frames": 63,
+          "seconds": 8.4,
+          "path": "static/mixture/robot/fold/05.mp4"
+        },
+        {
+          "demo": "demo_000062",
+          "n_frames": 65,
+          "seconds": 8.67,
+          "path": "static/mixture/robot/fold/06.mp4"
+        },
+        {
+          "demo": "demo_000019",
+          "n_frames": 84,
+          "seconds": 11.21,
+          "path": "static/mixture/robot/fold/07.mp4"
+        },
+        {
+          "demo": "demo_000075",
+          "n_frames": 55,
+          "seconds": 7.33,
+          "path": "static/mixture/robot/fold/08.mp4"
+        },
+        {
+          "demo": "demo_000008",
+          "n_frames": 92,
+          "seconds": 12.27,
+          "path": "static/mixture/robot/fold/09.mp4"
+        }
+      ],
+      "drawer": [
+        {
+          "demo": "demo_000001",
+          "n_frames": 36,
+          "seconds": 4.8,
+          "path": "static/mixture/robot/drawer/00.mp4"
+        },
+        {
+          "demo": "demo_000073",
+          "n_frames": 23,
+          "seconds": 3.07,
+          "path": "static/mixture/robot/drawer/01.mp4"
+        },
+        {
+          "demo": "demo_000024",
+          "n_frames": 26,
+          "seconds": 3.47,
+          "path": "static/mixture/robot/drawer/02.mp4"
+        },
+        {
+          "demo": "demo_000080",
+          "n_frames": 24,
+          "seconds": 3.2,
+          "path": "static/mixture/robot/drawer/03.mp4"
+        },
+        {
+          "demo": "demo_000052",
+          "n_frames": 22,
+          "seconds": 3.05,
+          "path": "static/mixture/robot/drawer/04.mp4"
+        },
+        {
+          "demo": "demo_000030",
+          "n_frames": 24,
+          "seconds": 3.2,
+          "path": "static/mixture/robot/drawer/05.mp4"
+        },
+        {
+          "demo": "demo_000081",
+          "n_frames": 24,
+          "seconds": 3.33,
+          "path": "static/mixture/robot/drawer/06.mp4"
+        },
+        {
+          "demo": "demo_000026",
+          "n_frames": 32,
+          "seconds": 4.27,
+          "path": "static/mixture/robot/drawer/07.mp4"
+        },
+        {
+          "demo": "demo_000028",
+          "n_frames": 25,
+          "seconds": 3.33,
+          "path": "static/mixture/robot/drawer/08.mp4"
+        },
+        {
+          "demo": "demo_000097",
+          "n_frames": 23,
+          "seconds": 3.07,
+          "path": "static/mixture/robot/drawer/09.mp4"
+        }
+      ]
+    },
+    "id": {
+      "stack": [
+        {
+          "demo": "demo_000038",
+          "n_frames": 10,
+          "seconds": 1.56,
+          "path": "static/mixture/id/stack/00.mp4"
+        },
+        {
+          "demo": "demo_000152",
+          "n_frames": 9,
+          "seconds": 1.47,
+          "path": "static/mixture/id/stack/01.mp4"
+        },
+        {
+          "demo": "demo_000160",
+          "n_frames": 9,
+          "seconds": 1.42,
+          "path": "static/mixture/id/stack/02.mp4"
+        },
+        {
+          "demo": "demo_000198",
+          "n_frames": 10,
+          "seconds": 1.6,
+          "path": "static/mixture/id/stack/03.mp4"
+        },
+        {
+          "demo": "demo_000161",
+          "n_frames": 8,
+          "seconds": 1.22,
+          "path": "static/mixture/id/stack/04.mp4"
+        },
+        {
+          "demo": "demo_000143",
+          "n_frames": 10,
+          "seconds": 1.5,
+          "path": "static/mixture/id/stack/05.mp4"
+        },
+        {
+          "demo": "demo_000116",
+          "n_frames": 10,
+          "seconds": 1.57,
+          "path": "static/mixture/id/stack/06.mp4"
+        },
+        {
+          "demo": "demo_000215",
+          "n_frames": 10,
+          "seconds": 1.54,
+          "path": "static/mixture/id/stack/07.mp4"
+        },
+        {
+          "demo": "demo_000026",
+          "n_frames": 10,
+          "seconds": 1.58,
+          "path": "static/mixture/id/stack/08.mp4"
+        },
+        {
+          "demo": "demo_000051",
+          "n_frames": 10,
+          "seconds": 1.51,
+          "path": "static/mixture/id/stack/09.mp4"
+        }
+      ],
+      "fold": [
+        {
+          "demo": "demo_000115",
+          "n_frames": 15,
+          "seconds": 2.31,
+          "path": "static/mixture/id/fold/00.mp4"
+        },
+        {
+          "demo": "demo_000113",
+          "n_frames": 23,
+          "seconds": 3.43,
+          "path": "static/mixture/id/fold/01.mp4"
+        },
+        {
+          "demo": "demo_000084",
+          "n_frames": 15,
+          "seconds": 2.45,
+          "path": "static/mixture/id/fold/02.mp4"
+        },
+        {
+          "demo": "demo_000222",
+          "n_frames": 18,
+          "seconds": 2.88,
+          "path": "static/mixture/id/fold/03.mp4"
+        },
+        {
+          "demo": "demo_000147",
+          "n_frames": 15,
+          "seconds": 2.27,
+          "path": "static/mixture/id/fold/04.mp4"
+        },
+        {
+          "demo": "demo_000160",
+          "n_frames": 14,
+          "seconds": 2.27,
+          "path": "static/mixture/id/fold/05.mp4"
+        },
+        {
+          "demo": "demo_000070",
+          "n_frames": 15,
+          "seconds": 2.5,
+          "path": "static/mixture/id/fold/06.mp4"
+        },
+        {
+          "demo": "demo_000172",
+          "n_frames": 15,
+          "seconds": 2.33,
+          "path": "static/mixture/id/fold/07.mp4"
+        },
+        {
+          "demo": "demo_000182",
+          "n_frames": 14,
+          "seconds": 2.16,
+          "path": "static/mixture/id/fold/08.mp4"
+        },
+        {
+          "demo": "demo_000057",
+          "n_frames": 20,
+          "seconds": 3.01,
+          "path": "static/mixture/id/fold/09.mp4"
+        }
+      ],
+      "drawer": [
+        {
+          "demo": "demo_000153",
+          "n_frames": 8,
+          "seconds": 1.25,
+          "path": "static/mixture/id/drawer/00.mp4"
+        },
+        {
+          "demo": "demo_000062",
+          "n_frames": 9,
+          "seconds": 1.43,
+          "path": "static/mixture/id/drawer/01.mp4"
+        },
+        {
+          "demo": "demo_000128",
+          "n_frames": 8,
+          "seconds": 1.41,
+          "path": "static/mixture/id/drawer/02.mp4"
+        },
+        {
+          "demo": "demo_000077",
+          "n_frames": 8,
+          "seconds": 1.38,
+          "path": "static/mixture/id/drawer/03.mp4"
+        },
+        {
+          "demo": "demo_000073",
+          "n_frames": 8,
+          "seconds": 1.36,
+          "path": "static/mixture/id/drawer/04.mp4"
+        },
+        {
+          "demo": "demo_000021",
+          "n_frames": 6,
+          "seconds": 0.96,
+          "path": "static/mixture/id/drawer/05.mp4"
+        },
+        {
+          "demo": "demo_000202",
+          "n_frames": 7,
+          "seconds": 1.16,
+          "path": "static/mixture/id/drawer/06.mp4"
+        },
+        {
+          "demo": "demo_000191",
+          "n_frames": 7,
+          "seconds": 1.07,
+          "path": "static/mixture/id/drawer/07.mp4"
+        },
+        {
+          "demo": "demo_000199",
+          "n_frames": 7,
+          "seconds": 1.09,
+          "path": "static/mixture/id/drawer/08.mp4"
+        },
+        {
+          "demo": "demo_000067",
+          "n_frames": 8,
+          "seconds": 1.37,
+          "path": "static/mixture/id/drawer/09.mp4"
+        }
+      ]
+    },
+    "ood": {
+      "stack": [
+        {
+          "demo": "demo_000658",
+          "n_frames": 13,
+          "seconds": 1.73,
+          "path": "static/mixture/ood/stack/00.mp4"
+        },
+        {
+          "demo": "demo_000583",
+          "n_frames": 41,
+          "seconds": 5.47,
+          "path": "static/mixture/ood/stack/01.mp4"
+        },
+        {
+          "demo": "demo_000142",
+          "n_frames": 60,
+          "seconds": 8.0,
+          "path": "static/mixture/ood/stack/02.mp4"
+        },
+        {
+          "demo": "demo_000884",
+          "n_frames": 17,
+          "seconds": 2.27,
+          "path": "static/mixture/ood/stack/03.mp4"
+        },
+        {
+          "demo": "demo_000137",
+          "n_frames": 14,
+          "seconds": 1.87,
+          "path": "static/mixture/ood/stack/04.mp4"
+        },
+        {
+          "demo": "demo_000584",
+          "n_frames": 36,
+          "seconds": 4.8,
+          "path": "static/mixture/ood/stack/05.mp4"
+        },
+        {
+          "demo": "demo_000870",
+          "n_frames": 4,
+          "seconds": 0.53,
+          "path": "static/mixture/ood/stack/06.mp4"
+        },
+        {
+          "demo": "demo_000824",
+          "n_frames": 27,
+          "seconds": 3.6,
+          "path": "static/mixture/ood/stack/07.mp4"
+        },
+        {
+          "demo": "demo_000785",
+          "n_frames": 26,
+          "seconds": 3.47,
+          "path": "static/mixture/ood/stack/08.mp4"
+        },
+        {
+          "demo": "demo_000064",
+          "n_frames": 23,
+          "seconds": 3.07,
+          "path": "static/mixture/ood/stack/09.mp4"
+        }
+      ],
+      "fold": [
+        {
+          "demo": "demo_000946",
+          "n_frames": 49,
+          "seconds": 6.53,
+          "path": "static/mixture/ood/fold/00.mp4"
+        },
+        {
+          "demo": "demo_000691",
+          "n_frames": 3,
+          "seconds": 0.4,
+          "path": "static/mixture/ood/fold/01.mp4"
+        },
+        {
+          "demo": "demo_000328",
+          "n_frames": 52,
+          "seconds": 6.93,
+          "path": "static/mixture/ood/fold/02.mp4"
+        },
+        {
+          "demo": "demo_000995",
+          "n_frames": 39,
+          "seconds": 5.2,
+          "path": "static/mixture/ood/fold/03.mp4"
+        },
+        {
+          "demo": "demo_000603",
+          "n_frames": 38,
+          "seconds": 5.07,
+          "path": "static/mixture/ood/fold/04.mp4"
+        },
+        {
+          "demo": "demo_000576",
+          "n_frames": 55,
+          "seconds": 7.33,
+          "path": "static/mixture/ood/fold/05.mp4"
+        },
+        {
+          "demo": "demo_000589",
+          "n_frames": 55,
+          "seconds": 7.33,
+          "path": "static/mixture/ood/fold/06.mp4"
+        },
+        {
+          "demo": "demo_000628",
+          "n_frames": 55,
+          "seconds": 7.33,
+          "path": "static/mixture/ood/fold/07.mp4"
+        },
+        {
+          "demo": "demo_000557",
+          "n_frames": 42,
+          "seconds": 5.6,
+          "path": "static/mixture/ood/fold/08.mp4"
+        },
+        {
+          "demo": "demo_000421",
+          "n_frames": 59,
+          "seconds": 7.87,
+          "path": "static/mixture/ood/fold/09.mp4"
+        }
+      ],
+      "drawer": [
+        {
+          "demo": "demo_000415",
+          "n_frames": 13,
+          "seconds": 1.73,
+          "path": "static/mixture/ood/drawer/00.mp4"
+        },
+        {
+          "demo": "demo_000458",
+          "n_frames": 15,
+          "seconds": 2.0,
+          "path": "static/mixture/ood/drawer/01.mp4"
+        },
+        {
+          "demo": "demo_000051",
+          "n_frames": 14,
+          "seconds": 1.87,
+          "path": "static/mixture/ood/drawer/02.mp4"
+        },
+        {
+          "demo": "demo_000108",
+          "n_frames": 17,
+          "seconds": 2.27,
+          "path": "static/mixture/ood/drawer/03.mp4"
+        },
+        {
+          "demo": "demo_000640",
+          "n_frames": 14,
+          "seconds": 1.87,
+          "path": "static/mixture/ood/drawer/04.mp4"
+        },
+        {
+          "demo": "demo_000878",
+          "n_frames": 18,
+          "seconds": 2.4,
+          "path": "static/mixture/ood/drawer/05.mp4"
+        },
+        {
+          "demo": "demo_000843",
+          "n_frames": 16,
+          "seconds": 2.13,
+          "path": "static/mixture/ood/drawer/06.mp4"
+        },
+        {
+          "demo": "demo_000935",
+          "n_frames": 16,
+          "seconds": 2.13,
+          "path": "static/mixture/ood/drawer/07.mp4"
+        },
+        {
+          "demo": "demo_000131",
+          "n_frames": 13,
+          "seconds": 1.73,
+          "path": "static/mixture/ood/drawer/08.mp4"
+        },
+        {
+          "demo": "demo_000291",
+          "n_frames": 22,
+          "seconds": 2.93,
+          "path": "static/mixture/ood/drawer/09.mp4"
+        }
+      ]
+    }
+  }
+}

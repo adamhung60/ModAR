@@ -1,0 +1,11 @@
+{
+  "stack": 16,
+  "fold": 32,
+  "drawer": 12,
+  "dump": 12,
+  "pick": 12,
+  "bread": 16,
+  "put": 60,
+  "bowls": 42,
+  "switch": 8
+}
